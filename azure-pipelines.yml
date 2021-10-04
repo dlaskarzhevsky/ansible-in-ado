@@ -1,0 +1,47 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  srcFolder: 'WebApp/WebApp'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: MSBuild@1
+  displayName: 'Build solution WebApp'
+  inputs:
+    solution: $(solution)
+
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to Staging Directory'
+  inputs:
+    Contents: '**'
+    TargetFolder: '$(build.ArtifactStagingDirectory)/prod-webapp'
+    CleanTargetFolder: true
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(srcFolder)/*'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/release/webapp.zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact - WebApp'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: '$(Parameters.ArtifactName)'
+  condition: succeededOrFailed()
+

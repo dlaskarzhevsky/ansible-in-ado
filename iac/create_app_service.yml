@@ -1,0 +1,26 @@
+- hosts: localhost
+
+  vars:
+    resource_group: advworks-rg
+    webapp_name: app-prdadvweb321
+    plan_name: asp-prdadvweb321
+    location: westus2
+
+  tasks:
+    - name: Create a resource group
+      azure_rm_resourcegroup:
+        name: "{{ resource_group }}"
+        location: "{{ location }}"
+
+    - name: Create an App Service
+      azure_rm_webapp:
+        resource_group: "{{ resource_group }}"
+        name: "{{ webapp_name }}"
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: "{{ plan_name }}"
+          sku: S1
+          number_of_workers: 1
+        frameworks:
+          - name: "net_framework"
+            version: "4.8"
