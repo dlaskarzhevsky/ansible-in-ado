@@ -1,5 +1,4 @@
-trigger:
-- main
+trigger: none
 
 pool:
   vmImage: 'windows-latest'
@@ -22,7 +21,6 @@ steps:
   inputs:
     solution: $(solution)
 
-
 - task: CopyFiles@2
   displayName: 'Copy Files to Staging Directory'
   inputs:
@@ -44,4 +42,3 @@ steps:
     PathtoPublish: '$(build.artifactstagingdirectory)'
     ArtifactName: '$(Parameters.ArtifactName)'
   condition: succeededOrFailed()
-
