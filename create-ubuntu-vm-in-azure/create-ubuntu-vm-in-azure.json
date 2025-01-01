@@ -185,7 +185,7 @@
                 "typeHandlerVersion": "1.4",
                 "autoUpgradeMinorVersion": true,
                 "settings":{
-                    "commandToExecute": "sh ansible-ubuntu-config.sh",
+                    "commandToExecute": "sh install-python.sh",
                     "fileUris": [ "https://raw.githubusercontent.com/dlaskarzhevsky/ansible-in-ado/main/create-ubuntu-vm-in-azure/install-python.sh" ]
                 }
             }
