@@ -170,7 +170,7 @@
                 }
             }
         },
-        // Custom script to install Python
+        // Custom script to install Ansible
         {
             "apiVersion": "2015-06-15",
             "name": "[concat(variables('vmName'),'/configureAnsible')]",
@@ -185,8 +185,8 @@
                 "typeHandlerVersion": "1.4",
                 "autoUpgradeMinorVersion": true,
                 "settings":{
-                    "commandToExecute": "sh install-python.sh",
-                    "fileUris": [ "https://raw.githubusercontent.com/dlaskarzhevsky/ansible-in-ado/main/create-ubuntu-vm-in-azure/install-python.sh" ]
+                    "commandToExecute": "sh install-ansible.sh",
+                    "fileUris": [ "https://raw.githubusercontent.com/dlaskarzhevsky/ansible-in-ado/main/create-ubuntu-vm-in-azure/install-ansible.sh" ]
                 }
             }
         }
